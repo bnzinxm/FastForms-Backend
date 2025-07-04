@@ -61,7 +61,7 @@ const AuthController: any = {
       }
 
       const passwordHash = await bcrypt.hash(password, 10);
-      await db.query('INSERT INTO users (fullName, email, password_hash) VALUES (?, ?, ?)', [fullName, email, passwordHash]);
+      await db.query('INSERT INTO users (full_name, email, password_hash) VALUES (?, ?, ?)', [fullName, email, passwordHash]);
 
       return res.status(201).json({
         status: 'success',
