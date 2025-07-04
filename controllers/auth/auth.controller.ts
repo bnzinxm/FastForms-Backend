@@ -9,7 +9,7 @@ const AuthController: any = {
   register: async (req: Request, res: Response) => {
     const { fullName, email, password } = req.body;
 
-    if (!email || !password) {
+    if (!fullName || !email || !password) {
       return res.status(400).json({
         status: 'error',
         code: 400,
