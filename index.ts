@@ -9,7 +9,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.get('/', (req, res) => {
+app.get('/v1', (req, res) => {
   res.send('FastForms API rodando com sucesso 🚀')
 })
 
