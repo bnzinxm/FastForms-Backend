@@ -4,12 +4,14 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const app = express()
+const app = express();
 
-app.use(cors())
+app.use(cors({
+  origin: "https://fastforms-app.vercel.app"
+}));
 app.use(express.json())
 
-app.get('/v1', (req, res) => {
+app.get('/', (req, res) => {
   res.send('FastForms API rodando com sucesso 🚀')
 })
 
