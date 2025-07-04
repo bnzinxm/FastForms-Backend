@@ -101,8 +101,11 @@
     "wrappy": "^1.0.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "prepare": "npm run build"
+  }, 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bnzinxm/FastForms-Backend.git"
