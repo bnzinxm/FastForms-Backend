@@ -7,7 +7,7 @@ dotenv.config()
 const app = express();
 
 app.use(cors({
-  origin: "https://fastforms-app.vercel.app"
+  origin: ["https://fastforms-app.vercel.app", "http://localhost:5173/"]
 }));
 app.use(express.json())
 
