@@ -5,6 +5,18 @@ import db from '../../config/database';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'segredo_supersecreto';
 
+function generateCustomUserId() {
+  // Gera algo parecido com d4e5d-e6fe8-rf1s2-xl9w6
+  const parts = [
+    Math.random().toString(36).slice(2, 7),
+    Math.random().toString(36).slice(2, 7),
+    Math.random().toString(36).slice(2, 7),
+    Math.random().toString(36).slice(2, 7)
+  ];
+  return parts.join('-');
+}
+
+
 const AuthController: any = {
   register: async (req: Request, res: Response) => {
     const { fullName, email, password } = req.body;
@@ -60,8 +72,10 @@ const AuthController: any = {
         });
       }
 
+      const userId = generateCustomUserId();
+
       const passwordHash = await bcrypt.hash(password, 10);
-      await db.query('INSERT INTO users (full_name, email, password_hash) VALUES (?, ?, ?)', [fullName, email, passwordHash]);
+      await db.query('INSERT INTO users (id, full_name, email, password_hash) VALUES (?, ?, ?, ?)', [userId, fullName, email, passwordHash]);
 
       return res.status(201).json({
         status: 'success',
@@ -69,6 +83,7 @@ const AuthController: any = {
         message: 'Conta criada com sucesso!',
         description: 'Seu cadastro foi realizado com sucesso no FastForms. Você já pode fazer login.',
         data: {
+          userId,
           fullName,
           email,
           createdAt: new Date().toISOString()
