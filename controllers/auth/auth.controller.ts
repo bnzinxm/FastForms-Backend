@@ -72,7 +72,7 @@ const AuthController: any = {
         message: 'Conta criada com sucesso!',
         description: 'Seu cadastro foi realizado com sucesso no FastForms. Você já pode fazer login.',
         data: {
-          userId,
+          id: userId,
           fullName,
           email,
           createdAt: new Date().toISOString()
