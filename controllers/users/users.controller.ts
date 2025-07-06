@@ -5,7 +5,7 @@ import db from "../../config/database";
 export const UserController: any = {
   // GET /:userId
   getUserById: async (req: Request, res: Response) => {
-    const { userId } = req.params;
+    const { userId } = req.query;
 
     try {
       // Buscar usuário no banco
@@ -14,7 +14,7 @@ export const UserController: any = {
         [userId]
       );
 
-      if ((rows as any[]).length === 0) {
+      if (!rows || (Array.isArray(rows) && rows.length === 0)) {
         return res.status(404).json({
           status: "fail",
           code: 404,
@@ -22,7 +22,7 @@ export const UserController: any = {
         });
       }
 
-      const user = (rows as any[])[0];
+      const user: any = Array.isArray(rows) ? rows[0] : rows;
 
       return res.status(200).json({
         status: "success",
