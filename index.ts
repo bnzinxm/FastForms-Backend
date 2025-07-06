@@ -1,7 +1,10 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
+
 import authRoutes from './routes/auth.routes'
+import userRoutes from './routes/user.routes'
+
 import db from './config/database' // seu pool de conexão mysql2
 
 dotenv.config()
@@ -28,7 +31,8 @@ app.get('/', (req, res) => {
 })
 
 // routes
-app.use('/auth', authRoutes)
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 // Função para testar conexão com DB
 async function checkDbConnection() {
