@@ -2,20 +2,9 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import db from '../../config/database';
+import { v4 as uuidv4 } from 'uuid';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'segredo_supersecreto';
-
-function generateCustomUserId() {
-  // Gera algo parecido com d4e5d-e6fe8-rf1s2-xl9w6
-  const parts = [
-    Math.random().toString(36).slice(2, 7),
-    Math.random().toString(36).slice(2, 7),
-    Math.random().toString(36).slice(2, 7),
-    Math.random().toString(36).slice(2, 7)
-  ];
-  return parts.join('-');
-}
-
 
 const AuthController: any = {
   register: async (req: Request, res: Response) => {
@@ -72,7 +61,7 @@ const AuthController: any = {
         });
       }
 
-      const userId = generateCustomUserId();
+      const userId = uuidv4();
 
       const passwordHash = await bcrypt.hash(password, 10);
       await db.query('INSERT INTO users (id, full_name, email, password_hash) VALUES (?, ?, ?, ?)', [userId, fullName, email, passwordHash]);
