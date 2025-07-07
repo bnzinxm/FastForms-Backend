@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.routes'
 import userRoutes from './routes/user.routes'
 
 import db from './config/database' // seu pool de conexão mysql2
+import formRoutes from './routes/form.routes'
 
 dotenv.config()
 
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 // routes
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
+app.use('/forms', formRoutes);
 
 // Função para testar conexão com DB
 async function checkDbConnection() {
