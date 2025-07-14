@@ -51,5 +51,5 @@ const PORT = process.env.PORT || 3333
 
 app.listen(PORT, async () => {
   console.log(`✅ FastForms API está no ar: http://localhost:${PORT}`)
-  await checkDbConnection()
+  await checkDbConnection();
 })
